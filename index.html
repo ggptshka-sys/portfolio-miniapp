@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petrachkov Kirill | Digital Designer</title>
+    
+    <!-- Подключение шрифта Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Настройка конфигурации Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gray: {
+                            400: '#9CA3AF',
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Плавный скролл */
+        html { scroll-behavior: smooth; }
+        /* Эффект для текста заголовка */
+        .glass-text {
+            background: linear-gradient(180deg, #FFFFFF 0%, #4B5563 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-inter antialiased">
+
+    <!-- Основной контейнер с ограничением ширины для больших экранов -->
+    <main class="max-w-md mx-auto md:max-w-4xl min-h-screen flex flex-col relative overflow-hidden">
+        
+        <!-- ==============================
+             СЕКЦИЯ 1: HERO (Первый экран)
+             ============================== -->
+        <section class="relative flex flex-col min-h-screen px-5 pt-6 pb-10 overflow-hidden">
+            
+            <!-- Фоновое изображение -->
+            <img src="img/avatar.png" alt="Petrachkov Kirill" class="absolute top-0 left-0 w-full h-3/4 object-cover object-top z-0">
+            
+            <!-- Хедер -->
+            <nav class="flex justify-between items-start mb-12 z-20 relative">
+                <div class="flex flex-col">
+                    <span class="font-medium text-white">Petrachkov Kirill</span>
+                    <span class="text-gray-400 text-sm">Digital designer</span>
+                </div>
+                
+                <!-- Кнопка Гамбургер -->
+                <button id="menu-btn" class="border border-white/20 rounded-xl p-3 hover:bg-white/10 transition z-[60] relative">
+                    <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M3 6H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M3 18H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </nav>
+
+            <!-- Контейнер контента -->
+            <div class="flex-1 flex flex-col justify-end h-full pb-4 relative z-10">
+                
+                <!-- Группа с текстом и кнопками -->
+                <div class="flex flex-col items-center mb-8">
+                    <!-- Огромный заголовок -->
+                    <h1 class="text-6xl md:text-8xl font-bold tracking-tighter glass-text text-center z-20 relative">
+                        ptrchkov
+                    </h1>
+                    
+                    <!-- Подпись имени -->
+                    <p class="text-gray-400 text-center mt-2 font-medium">
+                        Petrachkov Kirill, Design Interface
+                    </p>
+
+                    <!-- Описание -->
+                    <p class="text-gray-400 text-center mt-6 text-sm leading-relaxed max-w-xs mx-auto">
+                        UI/UX + AI Dev. Создаю интерфейсы, пишу код, внедряю нейросети. Делаю Telegram-боты и Mini Apps. Превращаю дизайн в&nbsp;рабочий продукт.
+                    </p>
+
+                    <!-- Кнопки -->
+                    <div class="flex flex-row justify-center gap-2 mt-8">
+                        <a href="about.html" class="px-4 py-3 rounded-[12px] border border-white/20 text-xs md:text-sm font-medium hover:bg-white/10 transition whitespace-nowrap">
+                            Обо мне
+                        </a>
+                        <a href="http://t.me/ptrchkov_ui" class="px-4 py-3 rounded-[12px] bg-white text-black text-xs md:text-sm font-semibold hover:bg-gray-200 transition whitespace-nowrap">
+                            Мой блог
+                        </a>
+                        <a href="about.html#contacts" class="px-4 py-3 rounded-[12px] border border-white/20 text-xs md:text-sm font-medium hover:bg-white/10 transition whitespace-nowrap">
+                            Контакты
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Низ экрана -->
+                <div class="text-center animate-bounce z-20 relative">
+                    <span class="text-xs text-gray-500 uppercase tracking-widest">Scroll view project</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==============================
+             СЕКЦИЯ 2: ПРОЕКТЫ
+             ============================== -->
+        <section class="px-5 py-12 space-y-16">
+            
+            <!-- Блок: Лучшие работы -->
+            <div>
+                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Лучшие работы</h2>
+                
+                <div class="flex flex-col gap-6">
+                    <!-- Card 1 -->
+                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-1.png" alt="Volta" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Volta</h3>
+                            <p class="text-gray-400 text-sm">Сайт для&nbsp;автосалона электрокаров</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Блок: Недавние проекты -->
+            <div>
+                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Недавние проекты</h2>
+                
+                <div class="flex flex-col gap-6">
+                    <!-- Card 2 -->
+                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Panorama click</h3>
+                            <p class="text-gray-400 text-sm">Сайт агентства недвижимости</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-3.png" alt="Inplain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Inplain</h3>
+                            <p class="text-gray-400 text-sm">Интернет-магазин производства пэт тары</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-4.png" alt="ChargeBase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">ChargeBase</h3>
+                            <p class="text-gray-400 text-sm">Система для&nbsp;управления зарядными станциями</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Кнопка загрузить еще -->
+            <button class="w-full py-4 bg-neutral-900 text-white rounded-xl text-sm font-medium hover:bg-neutral-800 transition">
+                Загрузить еще
+            </button>
+        </section>
+
+
+        <!-- ==============================
+             СЕКЦИЯ 3: ПОДВАЛ (Footer)
+             ============================== -->
+        <footer class="w-full bg-[#101010] px-5 pt-12 pb-8 border-t border-white/10 mt-10">
+            <div class="max-w-md mx-auto md:max-w-4xl">
+                <!-- Сетка ссылок -->
+                <div class="flex flex-col gap-8 mb-16">
+                    <!-- Колонка 1 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-white font-medium mb-2">Kirill Petrachkov</h4>
+                        <a href="about.html" class="text-gray-400 hover:text-white transition text-sm">Обо мне</a>
+                        <a href="about.html#contacts" class="text-gray-400 hover:text-white transition text-sm">Контакты</a>
+                        <a href="index.html" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
+                    </div>
+                    
+                    <!-- Колонка 2 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-white font-medium mb-2">Designers</h4>
+                        <a href="http://t.me/ptrchkov_ui" class="text-gray-400 hover:text-white transition text-sm">Блог в&nbsp;Telegram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-sm">Материалы для&nbsp;дизайнеров</a>
+                    </div>
+                </div>
+
+                <!-- Call To Action (Написать мне) -->
+                <a href="https://t.me/ptrchkov" class="group flex items-center justify-between border-b border-white/20 pb-4 mb-16 hover:border-white transition">
+                    <span class="text-3xl md:text-5xl font-light text-gray-200 group-hover:text-white transition">Написать мне</span>
+                    <svg class="w-10 h-10 md:w-14 md:h-14 text-gray-400 group-hover:text-white group-hover:translate-x-2 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+
+                <!-- Копирайт -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500 gap-4">
+                    <span class="opacity-60">Заказать такой же miniApp</span>
+                    <span class="opacity-60">Powered by @ptrchkov</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Мобильное меню -->
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6">
+        <!-- Хедер меню -->
+        <div class="flex justify-between items-start mb-12">
+            <div class="flex flex-col">
+                <span class="font-medium text-white">Petrachkov Kirill</span>
+                <span class="text-gray-400 text-sm">Digital designer</span>
+            </div>
+            
+            <!-- Кнопка закрытия -->
+            <button id="menu-close-btn" class="border border-white/20 rounded-xl p-3 hover:bg-white/10 transition">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Навигация -->
+        <div class="flex-1 flex flex-col">
+            <div class="space-y-0">
+                <a href="about.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Обо мне</a>
+                <a href="about.html#contacts" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Контакты</a>
+                <a href="index.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
+                <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
+                <a href="#" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Материалы для&nbsp;дизайнеров</a>
+            </div>
+        </div>
+
+        <!-- Футер меню -->
+        <div class="mt-auto pb-8">
+            <a href="https://t.me/ptrchkov" class="group flex items-center justify-between border-b border-white/20 pb-4 mb-6 hover:border-white transition">
+                <span class="text-3xl md:text-4xl font-light text-gray-200 group-hover:text-white transition">Написать мне</span>
+                <svg class="w-10 h-10 text-gray-400 group-hover:text-white group-hover:translate-x-2 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+
+            <div class="flex flex-col text-xs text-gray-500 gap-2">
+                <span class="opacity-60">Заказать такой же miniApp</span>
+                <span class="opacity-60">Powered by @ptrchkov</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Скрипт для мобильного меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const menuCloseBtn = document.getElementById('menu-close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+
+            menuBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
+            });
+
+            menuCloseBtn.addEventListener('click', closeMenu);
+
+            // Закрытие при клике на ссылки
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    setTimeout(closeMenu, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -135,8 +135,15 @@
                         <p class="text-gray-300 leading-relaxed">
                             - Разработка интерфейсов высоконагруженных...
                         </p>
+                        <div class="expandable-content hidden text-gray-300 leading-relaxed">
+                            - Разработка интерфейсов высоконагруженных систем и приложений<br>
+                            - Создание дизайн-систем и компонентных библиотек<br>
+                            - Проектирование пользовательских сценариев и UX-решений<br>
+                            - Взаимодействие с командой разработки и продуктовыми менеджерами<br>
+                            - Проведение исследований пользователей и тестирование интерфейсов
+                        </div>
                     </div>
-                    <a href="#" class="inline-block mt-3 text-white border-b border-white/40 hover:border-white transition pb-0.5 text-sm">Развернуть</a>
+                    <button class="expand-btn inline-block mt-3 text-white border-b border-white/40 hover:border-white transition pb-0.5 text-sm cursor-pointer bg-transparent border-0 border-b p-0">Развернуть</button>
                 </article>
 
                 <hr class="border-white/10">
@@ -150,8 +157,15 @@
                         <p class="text-gray-300 leading-relaxed">
                             - Полный цикл разработки дизайна для веб-пла...
                         </p>
+                        <div class="expandable-content hidden text-gray-300 leading-relaxed">
+                            - Полный цикл разработки дизайна для веб-платформ и мобильных приложений<br>
+                            - Создание брендинга и фирменного стиля для клиентов<br>
+                            - Разработка UI/UX решений для различных продуктов<br>
+                            - Управление проектами и координация работы команды<br>
+                            - Взаимодействие с клиентами и презентация концепций
+                        </div>
                     </div>
-                    <a href="#" class="inline-block mt-3 text-white border-b border-white/40 hover:border-white transition pb-0.5 text-sm">Развернуть</a>
+                    <button class="expand-btn inline-block mt-3 text-white border-b border-white/40 hover:border-white transition pb-0.5 text-sm cursor-pointer bg-transparent border-0 border-b p-0">Развернуть</button>
                 </article>
 
                 <hr class="border-white/10">
@@ -326,6 +340,31 @@
             menuLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     setTimeout(closeMenu, 100);
+                });
+            });
+        });
+
+        // Обработка кнопок "Развернуть/Свернуть" в блоке "Опыт работы"
+        document.addEventListener('DOMContentLoaded', () => {
+            const expandButtons = document.querySelectorAll('.expand-btn');
+            
+            expandButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const article = button.closest('article');
+                    const expandableContent = article.querySelector('.expandable-content');
+                    
+                    if (expandableContent) {
+                        const isHidden = expandableContent.classList.contains('hidden');
+                        
+                        if (isHidden) {
+                            expandableContent.classList.remove('hidden');
+                            button.textContent = 'Свернуть';
+                        } else {
+                            expandableContent.classList.add('hidden');
+                            button.textContent = 'Развернуть';
+                        }
+                    }
                 });
             });
         });

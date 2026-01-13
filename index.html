@@ -92,7 +92,7 @@
                     
                     <!-- Подпись имени -->
                     <p class="text-gray-400 text-center mt-2 font-medium">
-                        Petrachkov Kirill, Design Interface
+                        Petrachkov Kirill, Designer
                     </p>
 
                     <!-- Описание -->
@@ -127,9 +127,9 @@
              ============================== -->
         <section class="px-5 py-12 space-y-16">
             
-            <!-- Блок: Лучшие работы -->
+            <!-- Блок: Последний проект -->
             <div>
-                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Лучшие работы</h2>
+                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Последний проект</h2>
                 
                 <div class="flex flex-col gap-6">
                     <!-- Card 1 -->
@@ -145,13 +145,13 @@
                 </div>
             </div>
 
-            <!-- Блок: Недавние проекты -->
+            <!-- Блок: Все проекты -->
             <div>
-                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Недавние проекты</h2>
+                <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Все проекты</h2>
                 
                 <div class="flex flex-col gap-6">
                     <!-- Card 2 -->
-                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-2.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -182,11 +182,52 @@
                             <p class="text-gray-400 text-sm">Система для&nbsp;управления зарядными станциями</p>
                         </div>
                     </a>
+
+                    <!-- Скрытые проекты (появятся при клике на "Загрузить еще") -->
+                    <a href="project-2.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Panorama click</h3>
+                            <p class="text-gray-400 text-sm">Сайт агентства недвижимости</p>
+                        </div>
+                    </a>
+
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-3.png" alt="Inplain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Inplain</h3>
+                            <p class="text-gray-400 text-sm">Интернет-магазин производства пэт тары</p>
+                        </div>
+                    </a>
+
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-4.png" alt="ChargeBase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">ChargeBase</h3>
+                            <p class="text-gray-400 text-sm">Система для&nbsp;управления зарядными станциями</p>
+                        </div>
+                    </a>
+
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                        <div class="h-64 overflow-hidden">
+                            <img src="img/project-1.png" alt="Volta" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-1">Volta</h3>
+                            <p class="text-gray-400 text-sm">Сайт для&nbsp;автосалона электрокаров</p>
+                        </div>
+                    </a>
                 </div>
             </div>
 
             <!-- Кнопка загрузить еще -->
-            <button class="w-full py-4 bg-neutral-900 text-white rounded-xl text-sm font-medium hover:bg-neutral-800 transition">
+            <button id="load-more-btn" class="w-full py-4 bg-neutral-900 text-white rounded-xl text-sm font-medium hover:bg-neutral-800 transition">
                 Загрузить еще
             </button>
         </section>
@@ -325,6 +366,18 @@
             tg.ready();
             tg.expand();
             tg.setHeaderColor('#000000');
+        }
+
+        // Обработка кнопки "Загрузить еще"
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                const hiddenProjects = document.querySelectorAll('.load-more-project');
+                hiddenProjects.forEach(project => {
+                    project.classList.remove('hidden');
+                });
+                loadMoreBtn.style.display = 'none';
+            });
         }
     </script>
 </body>

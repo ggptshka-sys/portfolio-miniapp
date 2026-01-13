@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Подключение Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
     <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -130,7 +133,7 @@
                 
                 <div class="flex flex-col gap-6">
                     <!-- Card 1 -->
-                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-1.png" alt="Volta" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -138,7 +141,7 @@
                             <h3 class="text-xl font-semibold mb-1">Volta</h3>
                             <p class="text-gray-400 text-sm">Сайт для&nbsp;автосалона электрокаров</p>
                         </div>
-                    </article>
+                    </a>
                 </div>
             </div>
 
@@ -148,7 +151,7 @@
                 
                 <div class="flex flex-col gap-6">
                     <!-- Card 2 -->
-                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -156,10 +159,10 @@
                             <h3 class="text-xl font-semibold mb-1">Panorama click</h3>
                             <p class="text-gray-400 text-sm">Сайт агентства недвижимости</p>
                         </div>
-                    </article>
+                    </a>
 
                     <!-- Card 3 -->
-                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-3.png" alt="Inplain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -167,10 +170,10 @@
                             <h3 class="text-xl font-semibold mb-1">Inplain</h3>
                             <p class="text-gray-400 text-sm">Интернет-магазин производства пэт тары</p>
                         </div>
-                    </article>
+                    </a>
 
                     <!-- Card 4 -->
-                    <article class="bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-4.png" alt="ChargeBase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -178,7 +181,7 @@
                             <h3 class="text-xl font-semibold mb-1">ChargeBase</h3>
                             <p class="text-gray-400 text-sm">Система для&nbsp;управления зарядными станциями</p>
                         </div>
-                    </article>
+                    </a>
                 </div>
             </div>
 
@@ -315,6 +318,14 @@
                 });
             });
         });
+
+        // Инициализация Telegram Web App
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#000000');
+        }
     </script>
 </body>
 </html>

@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Подключение Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
     <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -175,27 +178,27 @@
             
             <div class="flex flex-col gap-3">
                 <!-- Telegram -->
-                <a href="#" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                <a href="t.me/ptrchkov" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
                     <span class="font-bold text-lg">Telegram</span>
                     <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
                 </a>
 
                 <!-- Behance -->
-                <a href="#" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                <a href="www.behance.net/ptrchkov" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
                     <span class="font-bold text-lg">Behance</span>
-                    <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
+                    <span class="text-gray-400 group-hover:text-white transition">behance.net/ptrchkov</span>
                 </a>
 
                 <!-- Dprofile -->
-                <a href="#" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                <a href="dprofile.ru/ptrchkov" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
                     <span class="font-bold text-lg">Dprofile</span>
-                    <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
+                    <span class="text-gray-400 group-hover:text-white transition">dprofile.ru/ptrchkov</span>
                 </a>
 
                 <!-- Blog (White) -->
-                <a href="#" class="flex justify-between items-center bg-white text-black p-5 rounded-2xl hover:bg-gray-200 transition">
+                <a href="t.me/ptrchkov_ui" class="flex justify-between items-center bg-white text-black p-5 rounded-2xl hover:bg-gray-200 transition">
                     <span class="font-bold text-lg">Blog</span>
-                    <span class="text-black font-medium">@ptrchkov</span>
+                    <span class="text-black font-medium">@ptrchkov_ui</span>
                 </a>
             </div>
         </section>
@@ -326,6 +329,14 @@
                 });
             });
         });
+
+        // Инициализация Telegram Web App
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#000000');
+        }
     </script>
 </body>
 </html>

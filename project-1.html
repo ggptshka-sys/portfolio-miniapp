@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Подключение Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
     <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -218,15 +221,15 @@
                 
                 <div class="flex flex-col gap-3">
                     <!-- Behance -->
-                    <a href="#" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                    <a href="https://dprofile.ru/case/103438/volta" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
                         <span class="font-bold text-lg">Behance</span>
-                        <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
+                        <span class="text-gray-400 group-hover:text-white transition">behance.net/ptrchkov</span>
                     </a>
 
                     <!-- Dprofile -->
-                    <a href="#" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                    <a href="https://dprofile.ru/case/103438/volta" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
                         <span class="font-bold text-lg">Dprofile</span>
-                        <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
+                        <span class="text-gray-400 group-hover:text-white transition">dprofile.ru/ptrchkov</span>
                     </a>
                 </div>
             </section>
@@ -425,6 +428,14 @@
                 });
             });
         });
+
+        // Инициализация Telegram Web App
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#000000');
+        }
     </script>
 </body>
 </html>

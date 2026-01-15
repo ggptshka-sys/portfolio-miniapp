@@ -42,6 +42,62 @@
     <style>
         /* Плавный скролл */
         html { scroll-behavior: smooth; }
+
+        /* Анимации для меню */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        #mobile-menu {
+            animation: fadeIn 0.3s ease-out, slideInRight 0.3s ease-out;
+        }
+
+        /* Анимации для появления элементов */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .fade-in-up-delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in-up-delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in-up-delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        /* Класс для элементов, которые появляются при скролле */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-black text-white font-inter antialiased">
@@ -76,12 +132,12 @@
              ============================== -->
         <section class="px-5 pt-4 pb-12">
             <!-- Заголовок -->
-            <h1 class="text-4xl md:text-5xl font-medium leading-tight mb-8">
+            <h1 class="text-4xl md:text-5xl font-medium leading-tight mb-8 fade-in-up">
                 Больше, чем просто дизайнер.
             </h1>
 
             <!-- Текст о специализации -->
-            <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed">
+            <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed fade-in-up fade-in-up-delay-1">
                 <p>
                     Я занимаюсь не просто UI/UX, а создаю комплексные цифровые продукты. Моя специализация — сложные высоконагруженные системы (с&nbsp;нуля или на&nbsp;этапе масштабирования).
                 </p>
@@ -91,12 +147,12 @@
             </div>
 
             <!-- Фото -->
-            <div class="my-8">
+            <div class="my-8 fade-in-up fade-in-up-delay-2">
                 <img src="img/about us/myphoto.png" alt="Kirill Petrachkov" class="w-full rounded-2xl object-cover shadow-lg">
             </div>
 
             <!-- Текст о подходе и AI -->
-            <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed mb-8">
+            <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed mb-8 fade-in-up fade-in-up-delay-3">
                 <p>
                     <span class="text-white font-medium">Мой подход: Эстетика + Технологии</span><br>
                     Я не ограничиваюсь дизайном. Активно использую AI, нейросети и код, чтобы оптимизировать процессы. Если задачу можно решить быстрее и четче с&nbsp;помощью новых инструментов — я это делаю. Разрабатываю ботов, Mini Apps и внедряю автоматизацию.
@@ -110,7 +166,7 @@
             </div>
 
             <!-- Кнопка CTA -->
-            <a href="https://t.me/ptrchkov" class="inline-block bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
+            <a href="https://t.me/ptrchkov" class="inline-block bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition fade-in-up fade-in-up-delay-3">
                 Написать мне
             </a>
         </section>
@@ -118,7 +174,7 @@
         <!-- ==============================
              СЕКЦИЯ 2: ОПЫТ РАБОТЫ (Block 2)
              ============================== -->
-        <section class="px-5 py-10">
+        <section class="px-5 py-10 scroll-fade-in">
             <!-- Заголовок с линией -->
             <div class="border-b border-white/10 pb-6 mb-8">
                 <h2 class="text-sm font-bold text-white uppercase tracking-widest">Опыт работы</h2>
@@ -187,7 +243,7 @@
         <!-- ==============================
              СЕКЦИЯ 3: КОНТАКТЫ (Block 3)
              ============================== -->
-        <section id="contacts" class="px-5 py-12">
+        <section id="contacts" class="px-5 py-12 scroll-fade-in">
             <h2 class="text-base font-medium text-white mb-6 uppercase">Контакты и ссылки</h2>
             
             <div class="flex flex-col gap-3">
@@ -229,7 +285,7 @@
                         <h4 class="text-white font-medium mb-2">Kirill Petrachkov</h4>
                         <a href="about.html" class="text-gray-400 hover:text-white transition text-sm">Обо мне</a>
                         <a href="#contacts" class="text-gray-400 hover:text-white transition text-sm">Контакты</a>
-                        <a href="index.html" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
+                        <a href="index.html#projects" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
                     </div>
                     
                     <!-- Колонка 2 -->
@@ -259,7 +315,7 @@
     </main>
 
     <!-- Мобильное меню -->
-    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6">
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6" style="opacity: 0; transform: translateX(100%);">
         <!-- Хедер меню -->
         <div class="flex justify-between items-start mb-12">
             <div class="flex flex-col">
@@ -280,7 +336,7 @@
             <div class="space-y-0">
                 <a href="about.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Обо мне</a>
                 <a href="#contacts" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Контакты</a>
-                <a href="index.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
+                <a href="index.html#projects" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
                 <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
                 <a href="#" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Материалы для&nbsp;дизайнеров</a>
             </div>
@@ -313,13 +369,29 @@
 
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');
+                // Небольшая задержка для плавной анимации
+                requestAnimationFrame(() => {
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.transform = 'translateX(100%)';
+                    requestAnimationFrame(() => {
+                        mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                        mobileMenu.style.opacity = '1';
+                        mobileMenu.style.transform = 'translateX(0)';
+                    });
+                });
                 menuIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             };
 
             const closeMenu = () => {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                mobileMenu.style.opacity = '0';
+                mobileMenu.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.transition = '';
+                }, 300);
                 menuIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
                 document.body.style.overflow = '';
@@ -376,6 +448,26 @@
             tg.expand();
             tg.setHeaderColor('#000000');
         }
+
+        // Intersection Observer для анимации при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за элементами с классом scroll-fade-in
+        document.querySelectorAll('.scroll-fade-in').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>

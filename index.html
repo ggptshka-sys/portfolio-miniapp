@@ -45,6 +45,66 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Анимации для меню */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        #mobile-menu {
+            animation: fadeIn 0.3s ease-out, slideInRight 0.3s ease-out;
+        }
+
+        /* Анимации для появления элементов */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .fade-in-up-delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in-up-delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in-up-delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in-up-delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        /* Класс для элементов, которые появляются при скролле */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-black text-white font-inter antialiased">
@@ -86,22 +146,22 @@
                 <!-- Группа с текстом и кнопками -->
                 <div class="flex flex-col items-center mb-8">
                     <!-- Огромный заголовок -->
-                    <h1 class="text-6xl md:text-8xl font-bold tracking-tighter glass-text text-center z-20 relative">
+                    <h1 class="text-6xl md:text-8xl font-bold tracking-tighter glass-text text-center z-20 relative fade-in-up">
                         ptrchkov
                     </h1>
                     
                     <!-- Подпись имени -->
-                    <p class="text-gray-400 text-center mt-2 font-medium">
+                    <p class="text-gray-400 text-center mt-2 font-medium fade-in-up fade-in-up-delay-1">
                         Petrachkov Kirill, Designer
                     </p>
 
                     <!-- Описание -->
-                    <p class="text-gray-400 text-center mt-6 text-sm leading-relaxed max-w-xs mx-auto">
+                    <p class="text-gray-400 text-center mt-6 text-sm leading-relaxed max-w-xs mx-auto fade-in-up fade-in-up-delay-2">
                         UI/UX + AI Dev. Создаю интерфейсы, пишу код, внедряю нейросети. Делаю Telegram-боты и Mini Apps. Превращаю дизайн в&nbsp;рабочий продукт.
                     </p>
 
                     <!-- Кнопки -->
-                    <div class="flex flex-row justify-center gap-2 mt-8">
+                    <div class="flex flex-row justify-center gap-2 mt-8 fade-in-up fade-in-up-delay-3">
                         <a href="about.html" class="px-4 py-3 rounded-[12px] border border-white/20 text-xs md:text-sm font-medium hover:bg-white/10 transition whitespace-nowrap">
                             Обо мне
                         </a>
@@ -128,7 +188,7 @@
         <section class="px-5 py-12 space-y-16">
             
             <!-- Блок: Последний проект -->
-            <div>
+            <div class="scroll-fade-in">
                 <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Последний проект</h2>
                 
                 <div class="flex flex-col gap-6">
@@ -146,12 +206,12 @@
             </div>
 
             <!-- Блок: Все проекты -->
-            <div>
+            <div id="projects" class="scroll-fade-in">
                 <h2 class="text-xs font-bold text-white uppercase tracking-widest mb-6">Все проекты</h2>
                 
                 <div class="flex flex-col gap-6">
                     <!-- Card 2 -->
-                    <a href="project-2.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-2.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -162,7 +222,7 @@
                     </a>
 
                     <!-- Card 3 -->
-                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-3.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-3.png" alt="Inplain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -173,7 +233,7 @@
                     </a>
 
                     <!-- Card 4 -->
-                    <a href="project-1.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-4.html" class="block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-4.png" alt="ChargeBase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -184,7 +244,7 @@
                     </a>
 
                     <!-- Скрытые проекты (появятся при клике на "Загрузить еще") -->
-                    <a href="project-2.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-2.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-2.png" alt="Panorama click" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -194,7 +254,7 @@
                         </div>
                     </a>
 
-                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-3.png" alt="Inplain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -204,7 +264,7 @@
                         </div>
                     </a>
 
-                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-4.png" alt="ChargeBase" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -214,7 +274,7 @@
                         </div>
                     </a>
 
-                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer">
+                    <a href="project-1.html" class="hidden load-more-project block bg-neutral-900 rounded-2xl overflow-hidden group cursor-pointer scroll-fade-in">
                         <div class="h-64 overflow-hidden">
                             <img src="img/project-1.png" alt="Volta" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         </div>
@@ -245,7 +305,7 @@
                         <h4 class="text-white font-medium mb-2">Kirill Petrachkov</h4>
                         <a href="about.html" class="text-gray-400 hover:text-white transition text-sm">Обо мне</a>
                         <a href="about.html#contacts" class="text-gray-400 hover:text-white transition text-sm">Контакты</a>
-                        <a href="index.html" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
+                        <a href="index.html#projects" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
                     </div>
                     
                     <!-- Колонка 2 -->
@@ -275,7 +335,7 @@
     </main>
 
     <!-- Мобильное меню -->
-    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6">
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6" style="opacity: 0; transform: translateX(100%);">
         <!-- Хедер меню -->
         <div class="flex justify-between items-start mb-12">
             <div class="flex flex-col">
@@ -296,7 +356,7 @@
             <div class="space-y-0">
                 <a href="about.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Обо мне</a>
                 <a href="about.html#contacts" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Контакты</a>
-                <a href="index.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
+                <a href="index.html#projects" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
                 <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
                 <a href="#" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Материалы для&nbsp;дизайнеров</a>
             </div>
@@ -329,13 +389,29 @@
 
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');
+                // Небольшая задержка для плавной анимации
+                requestAnimationFrame(() => {
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.transform = 'translateX(100%)';
+                    requestAnimationFrame(() => {
+                        mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                        mobileMenu.style.opacity = '1';
+                        mobileMenu.style.transform = 'translateX(0)';
+                    });
+                });
                 menuIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             };
 
             const closeMenu = () => {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                mobileMenu.style.opacity = '0';
+                mobileMenu.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.transition = '';
+                }, 300);
                 menuIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
                 document.body.style.overflow = '';
@@ -373,12 +449,43 @@
         if (loadMoreBtn) {
             loadMoreBtn.addEventListener('click', () => {
                 const hiddenProjects = document.querySelectorAll('.load-more-project');
-                hiddenProjects.forEach(project => {
-                    project.classList.remove('hidden');
+                hiddenProjects.forEach((project, index) => {
+                    setTimeout(() => {
+                        project.classList.remove('hidden');
+                        // Добавляем класс visible для анимации
+                        requestAnimationFrame(() => {
+                            project.classList.add('visible');
+                        });
+                    }, index * 100); // Задержка для последовательного появления
                 });
-                loadMoreBtn.style.display = 'none';
+                // Скрываем кнопку с анимацией
+                loadMoreBtn.style.transition = 'opacity 0.3s ease-out';
+                loadMoreBtn.style.opacity = '0';
+                setTimeout(() => {
+                    loadMoreBtn.style.display = 'none';
+                }, 300);
             });
         }
+
+        // Intersection Observer для анимации при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за элементами с классом scroll-fade-in
+        document.querySelectorAll('.scroll-fade-in').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>

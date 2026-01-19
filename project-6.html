@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroki Project | Petrachkov Kirill</title>
+    
+    <!-- Подключение шрифта Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Подключение Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Настройка конфигурации Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gray: {
+                            400: '#9CA3AF',
+                            500: '#6B7280',
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Плавный скролл */
+        html { scroll-behavior: smooth; }
+        
+        /* Ограничение ширины для десктопа - мобильный вид */
+        html {
+            background-color: #000000;
+            width: 100%;
+        }
+        body {
+            max-width: 430px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #000000;
+        }
+        
+        /* Скрытие стандартного скроллбара для чистоты дизайна */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Анимация для лайтбокса */
+        .lightbox-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Анимации для меню */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Анимации для появления элементов */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Класс для элементов, которые появляются при скролле */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-inter antialiased">
+
+    <!-- Основной контейнер -->
+    <main class="max-w-md mx-auto md:max-w-4xl min-h-screen flex flex-col relative">
+        
+        <!-- ==============================
+             ХЕДЕР (Из index.html)
+             ============================== -->
+        <nav class="flex justify-between items-start pt-6 px-5 mb-8 z-20 relative">
+            <div class="flex flex-col">
+                <a href="index.html" class="font-medium text-white hover:text-gray-300 transition">Petrachkov Kirill</a>
+                <span class="text-gray-400 text-sm">Digital designer</span>
+            </div>
+            
+            <button id="menu-btn" class="border border-white/20 rounded-xl p-3 hover:bg-white/10 transition z-[60] relative">
+                <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3 6H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3 18H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- ==============================
+             КОНТЕНТ ПРОЕКТА
+             ============================== -->
+        <div class="px-5 pb-20">
+            
+            <!-- Блок 1: Заголовок и Инфо -->
+            <header class="mb-8">
+                <!-- Награды / Иконки -->
+                <div class="flex gap-1 mb-6">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border border-white/10">
+                        <img src="img/achive_01.svg" alt="Award 1" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Заголовок H1 -->
+                <h1 class="text-4xl md:text-5xl font-medium leading-tight mb-4">
+                    Stroki — agency site
+                </h1>
+
+                <!-- Подзаголовок -->
+                <p class="text-gray-400">
+                    Совместно с&nbsp;Lexica.pro
+                </p>
+            </header>
+
+            <!-- Блок 2: Горизонтальный Слайдер (Scroll Snap) -->
+            <!-- -mx-5 px-5 позволяет скроллу уходить за границы паддингов на мобильных -->
+            <section class="mb-16 -mx-5 px-5 md:mx-0 md:px-0">
+                <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar">
+                    
+                    <!-- Слайд 1 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st1.png" 
+                             alt="Stroki 1" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+                    
+                    <!-- Слайд 2 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st2.png" 
+                             alt="Stroki 2" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+                    
+                    <!-- Слайд 3 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st3.png" 
+                             alt="Stroki 3" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                    <!-- Слайд 4 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st4.png" 
+                             alt="Stroki 4" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                    <!-- Слайд 5 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st5.png" 
+                             alt="Stroki 5" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                    <!-- Слайд 6 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st6.png" 
+                             alt="Stroki 6" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                    <!-- Слайд 7 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st7.png" 
+                             alt="Stroki 7" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                    <!-- Слайд 8 -->
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[70%] aspect-square relative group cursor-zoom-in">
+                        <img src="img/project/stroki/st8.png" 
+                             alt="Stroki 8" 
+                             class="w-full h-full object-cover rounded-2xl js-lightbox-trigger transition group-hover:opacity-90">
+                    </div>
+
+                </div>
+                <p class="text-xs text-gray-600 mt-2 pl-1 hidden md:block">Click image to expand</p>
+            </section>
+
+            <!-- Блок 3: О ПРОЕКТЕ -->
+            <section class="mb-16 scroll-fade-in">
+                <h2 class="text-sm font-bold text-white uppercase tracking-widest mb-6">О ПРОЕКТЕ</h2>
+                
+                <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed">
+                    <p>
+                        Stroki — агентство полного цикла, специализирующееся на разработке сложных программных решений, веб-интерфейсов и мобильных приложений. Компания создает продукты любого масштаба, используя современные технологии и гибкие методологии.
+                    </p>
+                    <p>
+                        Задача состояла в&nbsp;обновлении цифрового лица компании, чтобы оно соответствовало высокому уровню технической экспертизы агентства.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Блок 4: СОСТАВ РАБОТ -->
+            <section class="mb-16 scroll-fade-in">
+                <h2 class="text-sm font-bold text-white uppercase tracking-widest mb-6">СОСТАВ РАБОТ</h2>
+                
+                <div>
+                    <!-- Пункт 01 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">01. Аудит бренда</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Изучение текущего сайта и брендбука компании. Выделение ключевых визуальных констант для формирования базы будущих концепций.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 02 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">02. Структура и&nbsp;MVP</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Разработка информационной архитектуры. Согласование с руководством состава разделов и приоритезация функционала: разделение запуска на MVP-версию и последующий Full-релиз.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 03 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">03. Визуальное исследование</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Подбор референсов и анализ трендов в&nbsp;нише IT-агентств для определения вектора, в котором будет развиваться новая стилистика сайта.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 04 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">04. Концепция главной</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Разработка и презентация нескольких вариантов дизайна главной страницы для поиска оптимального визуального языка.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 05 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">05. Масштабирование дизайна</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Утверждение финального стиля и отрисовка всех внутренних страниц сайта, обеспечивая целостность восприятия.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 06 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">06. Техническая синхронизация</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Обсуждение стека технологий с командой разработки. Закладка возможностей интерфейса на будущее для беспрепятственного роста проекта.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 07 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">07. Адаптивность</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Финализация десктопных макетов и проработка адаптивных версий для корректного отображения на планшетах и мобильных устройствах.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 08 -->
+                    <div class="border-b border-white/10 pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">08. Дизайн-система</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Создание UI-кита и библиотеки компонентов для поддержки проекта, упрощения верстки и дальнейшего масштабирования.
+                        </div>
+                    </div>
+                    
+                    <!-- Пункт 09 -->
+                    <div class="pb-6 mb-6" style="margin-bottom: 24px;">
+                        <div class="text-white font-bold text-lg mb-2">09. Design Review</div>
+                        <div class="text-gray-400 leading-relaxed">
+                            Авторский надзор и проведение фронт-ревью на всех этапах разработки для контроля качества реализации интерфейса.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Блок 5: ПОСМОТРЕТЬ ПРОЕКТ -->
+            <section class="pt-10 scroll-fade-in">
+                <h2 class="text-base font-medium text-white mb-6 uppercase">ПОСМОТРЕТЬ ПРОЕКТ</h2>
+                
+                <div class="flex flex-col gap-3">
+                    <!-- Behance -->
+                    <a href="#" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                        <span class="font-bold text-lg">Behance</span>
+                        <span class="text-gray-400 group-hover:text-white transition">behance.net/ptrchkov</span>
+                    </a>
+
+                    <!-- Dprofile -->
+                    <a href="#" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                        <span class="font-bold text-lg">Dprofile</span>
+                        <span class="text-gray-400 group-hover:text-white transition">dprofile.ru/ptrchkov</span>
+                    </a>
+
+                    <!-- Figma -->
+                    <a href="#" class="flex justify-between items-center bg-neutral-900 p-5 rounded-2xl hover:bg-neutral-800 transition group">
+                        <span class="font-bold text-lg">Figma</span>
+                        <span class="text-gray-400 group-hover:text-white transition">figma.com/ptrchkov</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ==============================
+             ФУТЕР (Из index.html)
+             ============================== -->
+        <footer class="w-full bg-[#101010] px-5 pt-12 pb-8 border-t border-white/10 mt-10">
+            <div class="max-w-md mx-auto md:max-w-4xl">
+                <!-- Сетка ссылок -->
+                <div class="flex flex-col gap-8 mb-16">
+                    <!-- Колонка 1 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-white font-medium mb-2">Kirill Petrachkov</h4>
+                        <a href="about.html" class="text-gray-400 hover:text-white transition text-sm">Обо мне</a>
+                        <a href="about.html#contacts" class="text-gray-400 hover:text-white transition text-sm">Контакты</a>
+                        <a href="index.html#projects" class="text-gray-400 hover:text-white transition text-sm">Проекты</a>
+                    </div>
+                    
+                    <!-- Колонка 2 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="text-white font-medium mb-2">Designers</h4>
+                        <a href="http://t.me/ptrchkov_ui" class="text-gray-400 hover:text-white transition text-sm">Блог в&nbsp;Telegram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-sm">Материалы для&nbsp;дизайнеров</a>
+                    </div>
+                </div>
+
+                <a href="https://t.me/ptrchkov" class="group flex items-center justify-between border-b border-white/20 pb-4 mb-16 hover:border-white transition">
+                    <span class="text-3xl md:text-5xl font-light text-gray-200 group-hover:text-white transition">Написать мне</span>
+                    <svg class="w-10 h-10 md:w-14 md:h-14 text-gray-400 group-hover:text-white group-hover:translate-x-2 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500 gap-4">
+                    <a href="https://t.me/ptrchkov" class="opacity-60 hover:opacity-100 hover:text-white transition">Заказать такой же miniApp</a>
+                    <span class="opacity-60">Powered by @ptrchkov</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ==============================
+         LIGHTBOX MODAL (Скрыт по умолчанию)
+         ============================== -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+        <!-- Кнопка закрытия -->
+        <button id="lightbox-close" class="absolute top-5 right-5 z-[101] text-white/70 hover:text-white p-2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        
+        <!-- Контейнер картинки -->
+        <img id="lightbox-img" src="" alt="Fullscreen view" class="max-w-full max-h-screen object-contain p-4 md:p-10 scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- ==============================
+         SCRIPTS
+         ============================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('lightbox-close');
+            const triggers = document.querySelectorAll('.js-lightbox-trigger');
+
+            // Функция открытия
+            const openLightbox = (src) => {
+                lightboxImg.src = src;
+                lightbox.classList.remove('hidden');
+                // Небольшой таймаут для работы CSS transition (fade in)
+                requestAnimationFrame(() => {
+                    lightbox.classList.remove('opacity-0');
+                    lightboxImg.classList.remove('scale-95');
+                    lightboxImg.classList.add('scale-100');
+                });
+                document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+            };
+
+            // Функция закрытия
+            const closeLightbox = () => {
+                lightbox.classList.add('opacity-0');
+                lightboxImg.classList.remove('scale-100');
+                lightboxImg.classList.add('scale-95');
+                
+                setTimeout(() => {
+                    lightbox.classList.add('hidden');
+                    lightboxImg.src = '';
+                    document.body.style.overflow = ''; // Возвращаем скролл
+                }, 300); // Ждем окончания анимации
+            };
+
+            // Навешиваем события на картинки
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    openLightbox(e.target.src);
+                });
+            });
+
+            // Закрытие по кнопке
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // Закрытие по клику на фон
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Закрытие по ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+
+    <!-- Мобильное меню -->
+    <nav id="mobile-menu" class="hidden fixed inset-0 bg-black z-50 flex flex-col px-5 pt-6" style="opacity: 0; transform: translateX(100%);">
+        <!-- Хедер меню -->
+        <div class="flex justify-between items-start mb-12">
+            <div class="flex flex-col">
+                <a href="index.html" class="font-medium text-white hover:text-gray-300 transition">Petrachkov Kirill</a>
+                <span class="text-gray-400 text-sm">Digital designer</span>
+            </div>
+            
+            <!-- Кнопка закрытия -->
+            <button id="menu-close-btn" class="border border-white/20 rounded-xl p-3 hover:bg-white/10 transition">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Навигация -->
+        <div class="flex-1 flex flex-col">
+            <div class="space-y-0">
+                <a href="about.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Обо мне</a>
+                <a href="about.html#contacts" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Контакты</a>
+                <a href="index.html#projects" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
+                <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
+                <a href="#" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Материалы для&nbsp;дизайнеров</a>
+            </div>
+        </div>
+
+        <!-- Футер меню -->
+        <div class="mt-auto pb-8">
+            <a href="https://t.me/ptrchkov" class="group flex items-center justify-between border-b border-white/20 pb-4 mb-6 hover:border-white transition">
+                <span class="text-3xl md:text-4xl font-light text-gray-200 group-hover:text-white transition">Написать мне</span>
+                <svg class="w-10 h-10 text-gray-400 group-hover:text-white group-hover:translate-x-2 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+
+            <div class="flex flex-col text-xs text-gray-500 gap-2">
+                <a href="https://t.me/ptrchkov" class="opacity-60 hover:opacity-100 hover:text-white transition">Заказать такой же miniApp</a>
+                <span class="opacity-60">Powered by @ptrchkov</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Скрипт для мобильного меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const menuCloseBtn = document.getElementById('menu-close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                // Небольшая задержка для плавной анимации
+                requestAnimationFrame(() => {
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.transform = 'translateX(100%)';
+                    requestAnimationFrame(() => {
+                        mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                        mobileMenu.style.opacity = '1';
+                        mobileMenu.style.transform = 'translateX(0)';
+                    });
+                });
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                mobileMenu.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                mobileMenu.style.opacity = '0';
+                mobileMenu.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.transition = '';
+                }, 300);
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+
+            menuBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
+            });
+
+            menuCloseBtn.addEventListener('click', closeMenu);
+
+            // Закрытие при клике на ссылки
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    setTimeout(closeMenu, 100);
+                });
+            });
+        });
+
+        // Инициализация Telegram Web App
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#000000');
+        }
+
+        // Intersection Observer для анимации при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за элементами с классом scroll-fade-in
+        document.querySelectorAll('.scroll-fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

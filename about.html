@@ -42,6 +42,18 @@
     <style>
         /* Плавный скролл */
         html { scroll-behavior: smooth; }
+        
+        /* Ограничение ширины для десктопа - мобильный вид */
+        html {
+            background-color: #000000;
+            width: 100%;
+        }
+        body {
+            max-width: 430px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #000000;
+        }
 
         /* Анимации для меню */
         @keyframes fadeIn {
@@ -185,7 +197,7 @@
                 <!-- Место работы 1 -->
                 <article>
                     <div class="text-gray-500 text-sm mb-2">Февраль 2022 — Сейчас (4 года)</div>
-                    <h3 class="text-xl font-bold text-white mb-4">Stroki.dev</h3>
+                    <h3 class="text-xl font-bold text-white mb-4">Lexica.pro (ex. Stroki.dev)</h3>
                     <div class="space-y-2">
                         <p class="text-gray-400">Обязанности:</p>
                         <p class="text-gray-300 leading-relaxed">
@@ -256,13 +268,13 @@
                 <!-- Behance -->
                 <a href="www.behance.net/ptrchkov" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
                     <span class="font-bold text-lg">Behance</span>
-                    <span class="text-gray-400 group-hover:text-white transition">behance.net/ptrchkov</span>
+                    <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
                 </a>
 
                 <!-- Dprofile -->
                 <a href="dprofile.ru/ptrchkov" class="flex justify-between items-center bg-card p-5 rounded-2xl hover:bg-neutral-800 transition group">
                     <span class="font-bold text-lg">Dprofile</span>
-                    <span class="text-gray-400 group-hover:text-white transition">dprofile.ru/ptrchkov</span>
+                    <span class="text-gray-400 group-hover:text-white transition">@ptrchkov</span>
                 </a>
 
                 <!-- Blog (White) -->
@@ -306,7 +318,7 @@
 
                 <!-- Копирайт -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500 gap-4">
-                    <span class="opacity-60">Заказать такой же miniApp</span>
+                    <a href="https://t.me/ptrchkov" class="opacity-60 hover:opacity-100 hover:text-white transition">Заказать такой же miniApp</a>
                     <span class="opacity-60">Powered by @ptrchkov</span>
                 </div>
             </div>
@@ -319,7 +331,7 @@
         <!-- Хедер меню -->
         <div class="flex justify-between items-start mb-12">
             <div class="flex flex-col">
-                <span class="font-medium text-white">Petrachkov Kirill</span>
+                <a href="index.html" class="font-medium text-white hover:text-gray-300 transition">Petrachkov Kirill</a>
                 <span class="text-gray-400 text-sm">Digital designer</span>
             </div>
             
@@ -352,7 +364,7 @@
             </a>
 
             <div class="flex flex-col text-xs text-gray-500 gap-2">
-                <span class="opacity-60">Заказать такой же miniApp</span>
+                <a href="https://t.me/ptrchkov" class="opacity-60 hover:opacity-100 hover:text-white transition">Заказать такой же miniApp</a>
                 <span class="opacity-60">Powered by @ptrchkov</span>
             </div>
         </div>

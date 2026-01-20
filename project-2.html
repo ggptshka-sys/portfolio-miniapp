@@ -47,10 +47,10 @@
             width: 100%;
         }
         body {
-            max-width: 430px;
             width: 100%;
-            margin: 0 auto;
+            margin: 0;
             background-color: #000000;
+            position: relative;
         }
         
         /* Скрытие стандартного скроллбара для чистоты дизайна */
@@ -105,17 +105,53 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Стили для header при скролле */
+        .header-scroll {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            width: 100%;
+            max-width: 430px;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.5rem 1.25rem;
+            z-index: 50;
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header-scroll.visible {
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (min-width: 430px) {
+            .header-scroll {
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+            }
+            .header-scroll.visible {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
     </style>
 </head>
 <body class="bg-black text-white font-inter antialiased">
 
-    <!-- Основной контейнер -->
-    <main class="max-w-md mx-auto md:max-w-4xl min-h-screen flex flex-col relative">
+    <!-- Обертка для центрирования контента -->
+    <div class="min-h-screen w-full flex justify-center items-center bg-black">
+        
+        <!-- Основной контейнер -->
+        <main class="flex flex-col min-h-screen max-w-[430px] w-full relative overflow-hidden">
         
         <!-- ==============================
              ХЕДЕР (Из index.html)
              ============================== -->
-        <nav class="flex justify-between items-start pt-6 px-5 mb-8 z-20 relative">
+        <nav id="main-header" class="flex justify-between items-start pt-6 px-5 mb-8 z-20 relative">
             <div class="flex flex-col">
                 <a href="index.html" class="font-medium text-white hover:text-gray-300 transition">Petrachkov Kirill</a>
                 <span class="text-gray-400 text-sm">Digital designer</span>
@@ -128,6 +164,25 @@
                     <path d="M3 18H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
                 <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Хедер для скролла (скрытый по умолчанию) -->
+        <nav id="scroll-header" class="header-scroll flex justify-between items-start">
+            <div class="flex flex-col">
+                <a href="index.html" class="font-medium text-white hover:text-gray-300 transition">Petrachkov Kirill</a>
+                <span class="text-gray-400 text-sm">Digital designer</span>
+            </div>
+            
+            <button id="scroll-menu-btn" class="border border-white/20 rounded-xl p-3 hover:bg-white/10 transition z-[60] relative">
+                <svg id="scroll-menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3 6H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3 18H21" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg id="scroll-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
                     <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
             </button>
@@ -338,7 +393,9 @@
             </div>
         </footer>
 
-    </main>
+        </main>
+        
+    </div>
 
     <!-- ==============================
          LIGHTBOX MODAL (Скрыт по умолчанию)
@@ -440,8 +497,7 @@
                 <a href="about.html" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Обо мне</a>
                 <a href="about.html#contacts" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Контакты</a>
                 <a href="index.html#projects" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Проекты</a>
-                <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 border-b border-neutral-800 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
-                <a href="#" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Материалы для&nbsp;дизайнеров</a>
+                <a href="http://t.me/ptrchkov_ui" class="block text-xl text-white pt-6 pb-5 hover:text-gray-300 transition">Блог в&nbsp;Telegram</a>
             </div>
         </div>
 
@@ -546,6 +602,77 @@
         document.querySelectorAll('.scroll-fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // Управление header при скролле
+        let lastScrollTop = 0;
+        const scrollHeader = document.getElementById('scroll-header');
+        const scrollMenuBtn = document.getElementById('scroll-menu-btn');
+        const scrollMenuIcon = document.getElementById('scroll-menu-icon');
+        const scrollCloseIcon = document.getElementById('scroll-close-icon');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollThreshold = 100; // Порог скролла для показа header
+
+            if (scrollTop > scrollThreshold) {
+                // Если скроллим вниз - скрываем header
+                if (scrollTop > lastScrollTop) {
+                    scrollHeader.classList.remove('visible');
+                } 
+                // Если скроллим вверх - показываем header
+                else {
+                    scrollHeader.classList.add('visible');
+                }
+            } else {
+                // В начале страницы скрываем scroll header
+                scrollHeader.classList.remove('visible');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+        // Синхронизация состояния меню между основным и scroll header
+        const syncMenuState = () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const isMenuOpen = !mobileMenu.classList.contains('hidden');
+            
+            if (isMenuOpen) {
+                scrollMenuIcon.classList.add('hidden');
+                scrollCloseIcon.classList.remove('hidden');
+            } else {
+                scrollMenuIcon.classList.remove('hidden');
+                scrollCloseIcon.classList.add('hidden');
+            }
+        };
+
+        // Обработчик для кнопки меню в scroll header
+        if (scrollMenuBtn) {
+            scrollMenuBtn.addEventListener('click', () => {
+                const menuBtn = document.getElementById('menu-btn');
+                // Триггерим клик на основной кнопке меню
+                if (menuBtn) {
+                    menuBtn.click();
+                }
+            });
+        }
+
+        // Наблюдаем за изменениями состояния меню
+        const menuObserver = new MutationObserver(() => {
+            syncMenuState();
+        });
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+            menuObserver.observe(mobileMenu, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
+
+        // Синхронизируем состояние при загрузке
+        setTimeout(syncMenuState, 100);
     </script>
 </body>
 </html>
